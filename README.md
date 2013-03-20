@@ -11,6 +11,16 @@ Given a server start-up command, ```http_server_manager``` can:
 
 It is currently distributed as a development and testing tool and is not recommended for production use.
 
+Motivation
+----------
+
+For projects whose production environment is completed managed by a PaaS provider, such as Heroku or Rails Yard,
+using ```god``` or ```monit``` to manage your http processes in development and test environments can be overkill.
+
+```http_server_manager``` provides a simple means on managing the lifecycle of these processes in these environments.
+
+It is particularly useful for automated start and stop of these processes as part of a continuous integration pipeline.
+
 Usage
 -----
 
