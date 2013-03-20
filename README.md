@@ -1,34 +1,70 @@
 http_server_manager
 ====================
 
-Suspends execution until state changes via ```::Wait.until!``` methods.
+Aims to simplify managing the lifecycle of HTTP server processes.
 
-An alternative to the ```wait``` gem with a focus on readability via:
+Given a server start-up command, ```http_server_manager``` can:
 
-* Requiring a description of the state change being observed, which is included in any raised timeout exception:
+* Start the server, generate a pid file, redirect stdout and stderr to a log file and poll until the server has started
+* Provide the status of the server (started or stopped)
+* Stop the server, killing the servers process tree and deleting the generated pid file
 
-```ruby
-    Wait.until_true!("service has started") { service.started? }
-```
-
-* Providing alternate ```until``` methods:
-
-```ruby
-   Wait.until!("an exception does not occur") { foo.re_try! }
-   Wait.until_true!("true is returned") { foo.truthy? }
-   Wait.until_false!("false is returned") { foo.falsey? }
-```
+It is currently distributed as a development and testing tool and is not recommended for production use.
 
 Usage
 -----
 
-* ```gem install http_server_manager```
+1.  Install via ```gem install http_server_manager``` or ```gem 'http_server_manager``` in your Gemfile
+
+2.  Require:
+
+```ruby
+    require 'http_server_manager'
+```
+
+3.  Configure the location of server pid files and logs:
+
+```ruby
+    HttpServerManager.pid_dir = "some/pid/dir"
+    HttpServerManager.log_dir = "some/log/dir"
+```
+
+4.  Create a server class:
 
 ```ruby
     require 'http_server_manager'
 
-    ::Wait.default_timeout_in_seconds = 5
+    class MyServer < HttpServerManager::Server
+
+        def initialize
+            super(name: "My Server", port: 3000)
+        end
+
+        def start_command
+          "rackup -p #{@port} my/server_config.ru"
+        end
+
+    end
 ```
+
+5.  Control the status of the server:
+
+```ruby
+    server = MyServer.new
+
+    server.start! # blocks until server is running
+
+    server.status # returns :started
+
+    server.stop! # kills process
+
+    server.status # returns :stopped
+```
+
+OS Support
+----------
+
+Mac and Windows
 
 Requirements
 ------------
