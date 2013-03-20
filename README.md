@@ -14,22 +14,22 @@ It is currently distributed as a development and testing tool and is not recomme
 Usage
 -----
 
-1.  Install via ```gem install http_server_manager``` or ```gem 'http_server_manager``` in your Gemfile
+Step 1:  Install via ```gem install http_server_manager``` or ```gem 'http_server_manager``` in your Gemfile
 
-2.  Require:
+Step 2:  Require:
 
 ```ruby
     require 'http_server_manager'
 ```
 
-3.  Configure the location of server pid files and logs:
+Step 3:  Configure the location of server pid files and logs:
 
 ```ruby
     HttpServerManager.pid_dir = "some/pid/dir"
     HttpServerManager.log_dir = "some/log/dir"
 ```
 
-4.  Create a server class:
+Step 4:  Create a server class:
 
 ```ruby
     require 'http_server_manager'
@@ -47,7 +47,7 @@ Usage
     end
 ```
 
-5.  Control the status of the server:
+Step 5:  Control the status of the server:
 
 ```ruby
     server = MyServer.new
