@@ -14,8 +14,9 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "http_server_manager"
   s.license = "MIT"
 
-  s.files        = Dir.glob("./lib/**/*")
-  s.test_files   = Dir.glob("./spec/**/*")
+  s.files      = Dir.glob("./lib/**/*") + Dir.glob("./spec/support/**/*")
+  s.test_files = Dir.glob("./spec/**/*")
+
   s.require_paths = ["lib", "spec/support"]
 
   s.required_ruby_version = ">= 1.9.3"
