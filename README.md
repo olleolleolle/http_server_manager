@@ -89,17 +89,13 @@ Testing
 Ensure that your server is configured correctly:
 
 ```ruby
-    require 'http_server_manager/test'
+    require 'http_server_manager/test_support'
 
     describe MyServer do
 
       include_context "managed http server integration utilities" # Provided by http_server_manager as a test utility
 
       let(:server) { MyServer.new }
-
-      it "should be a HttpServerManager::Server" do
-        server.should be_an(HttpServerManager::Server)
-      end
 
       describe "#start!" do
 
