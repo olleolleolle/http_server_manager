@@ -120,4 +120,9 @@ Mac and Windows
 Requirements
 ------------
 
-* Ruby 1.9.3
+* Ruby 1.9
+
+Build Status
+------------
+
+[![Build Status](https://travis-ci.org/MYOB-Technology/http_server_manager.png)](https://travis-ci.org/MYOB-Technology/http_server_manager)
