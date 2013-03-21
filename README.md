@@ -14,7 +14,7 @@ It is currently distributed as a development and testing tool and is not recomme
 Motivation
 ----------
 
-For projects whose production environment is completed managed by a PaaS provider, such as Heroku or Rails Yard,
+For projects whose production environment is completed managed by a PaaS provider, such as Heroku or Engine Yard,
 using ```god``` or ```monit``` to manage your http processes in development and test environments can be overkill.
 
 ```http_server_manager``` provides a simple means on managing the lifecycle of these processes in these environments.
