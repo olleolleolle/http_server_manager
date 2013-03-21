@@ -1,5 +1,5 @@
 describe HttpServerManager::Rake::ServerTasks do
-  include_context "server integration utilities"
+  include_context "managed http server integration utilities"
   include ::Rake::DSL
 
   before(:all) do

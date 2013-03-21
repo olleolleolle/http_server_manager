@@ -8,6 +8,8 @@ end if ENV["coverage"]
 require_relative '../lib/http_server_manager'
 require_relative '../lib/http_server_manager/rake/task_generators'
 
+Bundler.require(:test)
+
 module HttpServerManager
 
   def self.root
@@ -16,13 +18,9 @@ module HttpServerManager
 
 end
 
-require_relative 'support/http_server_manager/test/silent_logger'
+require_relative 'support/http_server_manager/test'
 HttpServerManager.logger = HttpServerManager::Test::SilentLogger
 HttpServerManager.pid_dir = "#{HttpServerManager.root}/tmp/pids"
 HttpServerManager.log_dir = "#{HttpServerManager.root}/tmp/logs"
 
-Bundler.require(:test)
-
 require_relative '../examples/rack_server'
-
-Dir[File.expand_path('../support/**/*.rb', __FILE__)].each { |file| require file }

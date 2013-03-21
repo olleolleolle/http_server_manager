@@ -83,6 +83,39 @@ Alternatively, via Rake:
     # my_server:status
 ```
 
+Testing
+-------
+
+Ensure that your server is configured correctly:
+
+```ruby
+    require 'http_server_manager/test'
+
+    describe MyServer do
+
+      include_context "managed http server integration utilities" # Provided by http_server_manager as a test utility
+
+      let(:server) { MyServer.new }
+
+      it "should be a HttpServerManager::Server" do
+        server.should be_an(HttpServerManager::Server)
+      end
+
+      describe "#start!" do
+
+        after(:each) { force_stop! }
+
+        it "should start the server via the provided command" do
+          server.start!
+
+          wait_until_started!
+        end
+
+      end
+```
+
+For those not using RSpec, see http_server_manager/test/server_integration_utilities.rb
+
 OS Support
 ----------
 

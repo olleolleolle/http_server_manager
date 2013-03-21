@@ -1,5 +1,5 @@
 describe HttpServerManager::Server do
-  include_context "server integration utilities"
+  include_context "managed http server integration utilities"
 
   let(:server) { RackServer.new(port: 4001) }
 

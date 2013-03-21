@@ -1,4 +1,4 @@
-shared_context "server integration utilities" do
+shared_context "managed http server integration utilities" do
   include HttpServerManager::Test::ServerIntegrationUtilities
 
   before(:each) do
