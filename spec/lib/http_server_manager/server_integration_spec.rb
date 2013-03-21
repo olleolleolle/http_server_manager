@@ -1,10 +1,7 @@
 describe HttpServerManager::Server do
-  include_context "server integration specification utilities"
+  include_context "server integration utilities"
 
-  let(:description) { "Rack Server" }
-  let(:port) { 4001 }
-  let(:pid_file_name) { "rack_server.pid" }
-  let(:server) { HttpServerManager::RackServer.new(port: port) }
+  let(:server) { RackServer.new(port: 4001) }
 
   describe "#start!" do
 
@@ -35,7 +32,7 @@ describe HttpServerManager::Server do
       end
 
       it "should log that the server started on the configured port" do
-        logger.should_receive(:info).with(/started on port #{port}/)
+        logger.should_receive(:info).with(/started on port 4001/)
 
         server.start!
       end
@@ -50,7 +47,7 @@ describe HttpServerManager::Server do
       end
 
       it "should log that the server is already running on the configured port" do
-        logger.should_receive(:info).with(/already running on port #{port}/)
+        logger.should_receive(:info).with(/already running on port 4001/)
 
         server.start!
       end
@@ -65,7 +62,7 @@ describe HttpServerManager::Server do
 
       before(:each) { force_start! }
 
-      after(:each) { wait_until_stopped! } # Ensure server has completely stopped
+      after(:each) { force_stop! } # Ensure server has completely stopped
 
       it "should stop the server" do
         server.stop!
@@ -164,7 +161,7 @@ describe HttpServerManager::Server do
     end
 
     it "should return a string containing the servers port" do
-      server.to_s.should match(/#{port}/)
+      server.to_s.should match(/4001/)
     end
 
   end

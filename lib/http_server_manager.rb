@@ -1,6 +1,12 @@
-require 'net/http'
+require 'rubygems'
+require 'bundler'
+Bundler.require(:default)
 
-require_relative "http_server_manager/stdout_logger"
+require 'net/http'
+require 'sys/proctree'
+require 'wait_until'
+
+require_relative 'http_server_manager/stdout_logger'
 
 module HttpServerManager
 
@@ -16,4 +22,4 @@ module HttpServerManager
 
 end
 
-require_relative "http_server_manager/server"
+require_relative 'http_server_manager/server'

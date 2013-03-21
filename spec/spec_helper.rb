@@ -5,14 +5,24 @@ SimpleCov.start do
   refuse_coverage_drop
 end if ENV["coverage"]
 
-require_relative "../lib/http_server_manager"
+require_relative '../lib/http_server_manager'
+require_relative '../lib/http_server_manager/rake/task_generators'
 
-require 'rubygems'
-require 'bundler'
+module HttpServerManager
+
+  def self.root
+    @root ||= File.expand_path("../../../", __FILE__)
+  end
+
+end
+
+require_relative 'support/http_server_manager/test/silent_logger'
+HttpServerManager.logger = HttpServerManager::Test::SilentLogger
+HttpServerManager.pid_dir = "#{HttpServerManager.root}/tmp/pids"
+HttpServerManager.log_dir = "#{HttpServerManager.root}/tmp/logs"
+
 Bundler.require(:test)
 
-require 'sys/proctree'
-require 'wait_until'
+require_relative '../examples/rack_server'
 
-require_relative "support/http_server_manager"
 Dir[File.expand_path('../support/**/*.rb', __FILE__)].each { |file| require file }

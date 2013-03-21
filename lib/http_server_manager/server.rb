@@ -2,6 +2,8 @@ module HttpServerManager
 
   class Server
 
+    attr_reader :name, :port
+
     def initialize(options)
       @name = options[:name]
       @port = options[:port]
