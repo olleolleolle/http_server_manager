@@ -18,7 +18,7 @@ module HttpServerManager
 
 end
 
-require_relative 'support/http_server_manager/test'
+require_relative 'support/http_server_manager/test_support'
 HttpServerManager.logger = HttpServerManager::Test::SilentLogger
 HttpServerManager.pid_dir = "#{HttpServerManager.root}/tmp/pids"
 HttpServerManager.log_dir = "#{HttpServerManager.root}/tmp/logs"
