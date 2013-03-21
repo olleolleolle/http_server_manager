@@ -40,6 +40,10 @@ module HttpServerManager
       "#{@name} on port #{@port}"
     end
 
+    def logger
+      HttpServerManager.logger
+    end
+
     private
 
     def running?
@@ -72,10 +76,6 @@ module HttpServerManager
 
     def log_dir
       HttpServerManager.log_dir
-    end
-
-    def logger
-      HttpServerManager.logger
     end
 
   end
