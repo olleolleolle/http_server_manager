@@ -47,7 +47,7 @@ Step 4:  Create a server class:
     class MyServer < HttpServerManager::Server
 
         def initialize
-            super(name: "My Server", port: 3000)
+            super(name: :my_server, port: 3000)
         end
 
         def start_command
@@ -69,6 +69,18 @@ Step 5:  Control the status of the server:
     server.stop! # kills process
 
     server.status # returns :stopped
+```
+
+Alternatively, via Rake:
+
+```ruby
+    require 'http_server_manager/rake/task_generators'
+
+    HttpServerManager::Rake::ServerTasks.new(server)
+    # Generates tasks:
+    # my_server:start
+    # my_server:stop
+    # my_server:status
 ```
 
 OS Support
