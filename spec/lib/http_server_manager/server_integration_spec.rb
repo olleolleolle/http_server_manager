@@ -1,4 +1,4 @@
-describe HttpServerManager::Server do
+describe HttpServerManager::Server, "managing a real server" do
   include_context "managed http server integration utilities"
 
   let(:server) { RackServer.new(port: 4001) }

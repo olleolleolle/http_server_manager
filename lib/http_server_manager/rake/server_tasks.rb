@@ -17,6 +17,11 @@ module HttpServerManager
           server.stop!
         end
 
+        desc "Restart an potentially running #{server.name}"
+        task :restart do
+          server.restart!
+        end
+
         desc "Displays the status of a #{server.name} process"
         task :status do
           puts "#{server.name} is #{server.status}"

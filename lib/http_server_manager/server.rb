@@ -32,6 +32,11 @@ module HttpServerManager
       end
     end
 
+    def restart!
+      stop!
+      start!
+    end
+
     def status
       running? ? :started : :stopped
     end
