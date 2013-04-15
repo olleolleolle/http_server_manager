@@ -5,9 +5,10 @@ Aims to simplify managing the lifecycle of HTTP server processes.
 
 Given a server start-up command, ```http_server_manager``` can:
 
-* Start the server, generate a pid file, redirect stdout and stderr to a log file and poll until the server has started
+* Start the server, which creates a pid file, redirects stdout and stderr to a log file and blocks until started
 * Provide the status of the server (started or stopped)
 * Stop the server, killing the servers process tree and deleting the generated pid file
+* Restart the server, stopping a potentially running server and then starting it
 
 It is currently distributed as a development and testing tool and is not recommended for production use.
 
@@ -17,9 +18,9 @@ Motivation
 For projects whose production environment is completed managed by a PaaS provider, such as Heroku or Engine Yard,
 using ```god``` or ```monit``` to manage your http processes in development and test environments can be overkill.
 
-```http_server_manager``` provides a simple means on managing the lifecycle of these processes in these environments.
+```http_server_manager``` provides a simple means of managing the lifecycle of these processes in these environments.
 
-It is particularly useful for automated start and stop of these processes as part of a continuous integration pipeline.
+It is particularly useful for automated management of these processes as part of a continuous integration pipeline.
 
 Usage
 -----
@@ -66,6 +67,10 @@ Step 5:  Control the status of the server:
 
     server.status # returns :started
 
+    server.restart! # kills process
+
+    server.status # returns :started
+
     server.stop! # kills process
 
     server.status # returns :stopped
@@ -79,6 +84,7 @@ Alternatively, via Rake:
     HttpServerManager::Rake::ServerTasks.new(server)
     # Generates tasks:
     # my_server:start
+    # my_server:restart
     # my_server:stop
     # my_server:status
 ```
