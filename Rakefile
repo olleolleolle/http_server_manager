@@ -46,7 +46,7 @@ end
 
 task :validate do
   print " Travis CI Validation ".center(80, "*") + "\n"
-  result = `travis-lint #{File.expand_path('../travis.yml', __FILE__)}`
+  result = `travis-lint #{File.expand_path('../.travis.yml', __FILE__)}`
   puts result
   print "*" * 80+ "\n"
   raise "Travis CI validation failed" unless result =~ /^Hooray/
