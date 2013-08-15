@@ -11,8 +11,8 @@ describe HttpServerManager::Server do
   let(:server) { HttpServerManager::TestableServer.new(name: "Test Server", port: 8888) }
 
   before(:each) do
-    server.stub!(:start!)
-    server.stub!(:stop!)
+    server.stub(:start!)
+    server.stub(:stop!)
   end
 
   describe "#restart!" do

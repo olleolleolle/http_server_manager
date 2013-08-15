@@ -3,6 +3,7 @@ describe HttpServerManager::Rake::ServerTasks do
   include ::Rake::DSL
 
   let(:task_namespace) { :test_server_namespace }
+  let(:task_scope) { double("TaskScope", path: task_namespace) }
   let(:server) { double(HttpServerManager::Server, name: "test_server") }
 
   let(:server_tasks) { HttpServerManager::Rake::ServerTasks.new(server) }
@@ -13,7 +14,7 @@ describe HttpServerManager::Rake::ServerTasks do
     end
   end
 
-  after(:each) { Rake.application.tasks_in_scope([task_namespace]).each(&:clear) }
+  after(:each) { Rake.application.tasks_in_scope(task_scope).each(&:clear) }
 
   describe "start task" do
 
@@ -55,7 +56,7 @@ describe HttpServerManager::Rake::ServerTasks do
     let(:task) { ::Rake::Task["#{task_namespace}:status"] }
 
     it "should write the server name and it's status to stdout" do
-      server.stub!(:status).and_return("stopped")
+      server.stub(:status).and_return("stopped")
       server_tasks.should_receive(:puts).with("test_server is stopped")
 
       task.execute

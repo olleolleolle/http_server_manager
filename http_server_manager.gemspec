@@ -21,13 +21,13 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = ">= 1.9.3"
 
-  s.add_dependency "rake", "~> 10.0.3"
+  s.add_dependency "rake", "~> 10.1.0"
   s.add_dependency "sys-proctree", "~> 0.0.4"
   s.add_dependency "wait_until", "~> 0.0.1"
 
-  s.add_development_dependency "rspec", "~> 2.12"
+  s.add_development_dependency "rspec", "~> 2.14"
   s.add_development_dependency "simplecov", "~> 0.7.1"
-  s.add_development_dependency "flog", "~> 3.2.2"
-  s.add_development_dependency "travis-lint", "~> 1.6.0"
+  s.add_development_dependency "flog", "~> 4.1.1"
+  s.add_development_dependency "travis-lint", "~> 1.7.0"
   s.add_development_dependency "rack", "~> 1.5.2"
 end
