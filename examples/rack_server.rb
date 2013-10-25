@@ -5,7 +5,7 @@ class RackServer < HttpServerManager::Server
   end
 
   def start_command
-    "rackup -p #{@port} #{File.expand_path("../server_config.ru", __FILE__)}"
+    "rackup --host #{host} --port #{port} #{File.expand_path("../server_config.ru", __FILE__)}"
   end
 
 end

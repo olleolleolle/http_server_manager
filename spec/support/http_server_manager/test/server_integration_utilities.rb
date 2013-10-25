@@ -1,5 +1,4 @@
 module HttpServerManager
-
   module Test
 
     module ServerIntegrationUtilities
@@ -35,7 +34,7 @@ module HttpServerManager
 
       def wait_until_started!
         ::Wait.until_true!("#{server.name} starts") do
-          !!Net::HTTP.get_response("localhost", "/", server.port) && pid_file_exists?
+          !!Net::HTTP.get_response(server.host, "/", server.port) && pid_file_exists?
         end
         FileUtils.cp(pid_file_path, pid_file_backup_path)
       end
@@ -43,7 +42,7 @@ module HttpServerManager
       def wait_until_stopped!
         ::Wait.until_true!("#{server.name} stops") do
           begin
-            Net::HTTP.get_response("localhost", "/", server.port)
+            Net::HTTP.get_response(server.host, "/", server.port)
             false
           rescue
             !pid_file_exists?
@@ -95,5 +94,4 @@ module HttpServerManager
     end
 
   end
-
 end

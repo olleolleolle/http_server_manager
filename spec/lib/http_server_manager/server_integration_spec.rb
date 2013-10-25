@@ -1,7 +1,7 @@
 describe HttpServerManager::Server, "managing a real server" do
   include_context "managed http server integration utilities"
 
-  let(:server) { RackServer.new(port: 4001) }
+  let(:server) { RackServer.new(host: "localhost", port: 4001) }
 
   describe "#start!" do
 
@@ -32,7 +32,7 @@ describe HttpServerManager::Server, "managing a real server" do
       end
 
       it "should log that the server started on the configured port" do
-        logger.should_receive(:info).with(/started on port 4001/)
+        logger.should_receive(:info).with(/started on localhost:4001/)
 
         server.start!
       end
@@ -47,7 +47,7 @@ describe HttpServerManager::Server, "managing a real server" do
       end
 
       it "should log that the server is already running on the configured port" do
-        logger.should_receive(:info).with(/already running on port 4001/)
+        logger.should_receive(:info).with(/already running on localhost:4001/)
 
         server.start!
       end
@@ -158,6 +158,10 @@ describe HttpServerManager::Server, "managing a real server" do
 
     it "should return a string containing the servers name" do
       server.to_s.should match(/rack_server/)
+    end
+
+    it "should return a string containing the servers host" do
+      server.to_s.should match(/localhost/)
     end
 
     it "should return a string containing the servers port" do

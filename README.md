@@ -48,11 +48,11 @@ Step 4:  Create a server class:
     class MyServer < HttpServerManager::Server
 
         def initialize
-            super(name: :my_server, port: 3000)
+            super(name: :my_server, host: "localhost", port: 3000)
         end
 
         def start_command
-          "rackup -p #{@port} my/server_config.ru"
+          "rackup --host #{host} --port #{port} my/server_config.ru"
         end
 
     end

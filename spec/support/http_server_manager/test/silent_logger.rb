@@ -1,5 +1,4 @@
 module HttpServerManager
-
   module Test
 
     class SilentLogger
@@ -11,5 +10,4 @@ module HttpServerManager
     end
 
   end
-
 end

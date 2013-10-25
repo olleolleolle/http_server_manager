@@ -8,7 +8,7 @@ describe HttpServerManager::Server do
 
   end
 
-  let(:server) { HttpServerManager::TestableServer.new(name: "Test Server", port: 8888) }
+  let(:server) { HttpServerManager::TestableServer.new(name: "Test Server", host: "localhost", port: 8888) }
 
   before(:each) do
     server.stub(:start!)

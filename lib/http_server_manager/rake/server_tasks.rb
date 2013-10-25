@@ -1,7 +1,6 @@
 require 'rake/tasklib' unless defined? (::Rake::TaskLib)
 
 module HttpServerManager
-
   module Rake
 
     class ServerTasks < ::Rake::TaskLib
@@ -31,5 +30,4 @@ module HttpServerManager
     end
 
   end
-
 end

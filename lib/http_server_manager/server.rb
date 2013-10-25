@@ -2,23 +2,24 @@ module HttpServerManager
 
   class Server
 
-    attr_reader :name, :port
+    attr_reader :name, :host, :port
 
     def initialize(options)
       @name = options[:name]
+      @host = options[:host]
       @port = options[:port]
       @deletable_artifacts = [pid_file_path]
     end
 
     def start!
       if running?
-        logger.info "#{@name} already running on port #{@port}"
+        logger.info "#{@name} already running on #{@host}:#{@port}"
       else
         ensure_directories_exist
         pid = Process.spawn(start_command, { [:out, :err] => [log_file_path, "w"] })
         create_pid_file(pid)
         Wait.until_true!("#{@name} is running") { running? }
-        logger.info "#{@name} started on port #{@port}"
+        logger.info "#{@name} started on #{@host}:#{@port}"
       end
     end
 
@@ -42,7 +43,7 @@ module HttpServerManager
     end
 
     def to_s
-      "#{@name} on port #{@port}"
+      "#{@name} on #{@host}:#{@port}"
     end
 
     def logger
@@ -52,7 +53,7 @@ module HttpServerManager
     private
 
     def running?
-      !!Net::HTTP.get_response("localhost", "/", @port) rescue false
+      !!Net::HTTP.get_response(@host, "/", @port) rescue false
     end
 
     def current_pid
