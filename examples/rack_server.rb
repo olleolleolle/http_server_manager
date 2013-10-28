@@ -1,7 +1,7 @@
 class RackServer < HttpServerManager::Server
 
   def initialize(options)
-    super({ name: "rack_server" }.merge(options))
+    super(options)
   end
 
   def start_command

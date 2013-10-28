@@ -1,7 +1,11 @@
 describe HttpServerManager::Server, "managing a real server" do
   include_context "managed http server integration utilities"
 
-  let(:server) { RackServer.new(host: "localhost", port: 4001) }
+  let(:name) { "test_server" }
+  let(:host) { "localhost" }
+  let(:port) { 4001 }
+
+  let(:server) { RackServer.new(name: name, host: host, port: port) }
 
   describe "#start!" do
 
@@ -20,19 +24,19 @@ describe HttpServerManager::Server, "managing a real server" do
       it "should create a pid file for the server in the configured pid directory" do
         server.start!
 
-        ::Wait.until_true!("rack server pid created") { pid_file_exists? }
+        ::Wait.until_true!("server pid created") { pid_file_exists? }
       end
 
       it "should create a log file capturing the stdout and stderr of the server in the configured log directory" do
         server.start!
 
         ::Wait.until_true!("log file is created") do
-          File.exists?("#{log_dir}/rack_server_console.log")
+          File.exists?("#{log_dir}/#{name}_console.log")
         end
       end
 
       it "should log that the server started on the configured port" do
-        logger.should_receive(:info).with(/started on localhost:4001/)
+        logger.should_receive(:info).with(/started on #{host}:#{port}/)
 
         server.start!
       end
@@ -47,7 +51,7 @@ describe HttpServerManager::Server, "managing a real server" do
       end
 
       it "should log that the server is already running on the configured port" do
-        logger.should_receive(:info).with(/already running on localhost:4001/)
+        logger.should_receive(:info).with(/already running on #{host}:#{port}/)
 
         server.start!
       end
@@ -73,8 +77,8 @@ describe HttpServerManager::Server, "managing a real server" do
       it "should delete the servers pid file" do
         server.stop!
 
-        ::Wait.until_false!("rack server pid is deleted") do
-          File.exists?("#{pid_dir}/rack_server.pid")
+        ::Wait.until_false!("server pid is deleted") do
+          File.exists?("#{pid_dir}/#{name}.pid")
         end
       end
 
@@ -157,15 +161,15 @@ describe HttpServerManager::Server, "managing a real server" do
   describe "#to_s" do
 
     it "should return a string containing the servers name" do
-      server.to_s.should match(/rack_server/)
+      server.to_s.should match(name)
     end
 
     it "should return a string containing the servers host" do
-      server.to_s.should match(/localhost/)
+      server.to_s.should match(host)
     end
 
     it "should return a string containing the servers port" do
-      server.to_s.should match(/4001/)
+      server.to_s.should match(port.to_s)
     end
 
   end

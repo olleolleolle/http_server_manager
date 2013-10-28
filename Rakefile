@@ -50,6 +50,6 @@ task :validate do
   raise "Travis CI validation failed" unless result =~ /^Hooray/
 end
 
-task :default => [:clobber, :metrics, :coverage]
+task :default => %w{ clobber metrics coverage }
 
-task :pre_commit => [:clobber, :metrics, "coverage:show", :validate]
+task :pre_commit => %w{ clobber metrics coverage:show validate }

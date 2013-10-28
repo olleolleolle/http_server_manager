@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "./lib/http_server_manager/version"
+require "http_server_manager/version"
 
 Gem::Specification.new do |s|
   s.name = "http_server_manager"

@@ -9,8 +9,6 @@ end if ENV["coverage"]
 require_relative '../lib/http_server_manager'
 require_relative '../lib/http_server_manager/rake/task_generators'
 
-Bundler.require(:test)
-
 module HttpServerManager
 
   def self.root
