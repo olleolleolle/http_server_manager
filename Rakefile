@@ -1,9 +1,8 @@
 require 'bundler'
+require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
 
 directory "pkg"
-
-Bundler::GemHelper.install_tasks
 
 desc "Removed generated artefacts"
 task :clobber do
