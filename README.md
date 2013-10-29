@@ -17,6 +17,7 @@ Status
 
 [![Build Status](https://travis-ci.org/MYOB-Technology/http_server_manager.png)](https://travis-ci.org/MYOB-Technology/http_server_manager)
 [![Gem Version](https://badge.fury.io/rb/http_server_manager.png)](http://badge.fury.io/rb/http_server_manager)
+[![Dependency Status](https://gemnasium.com/MYOB-Technology/http_server_manager.png)](https://gemnasium.com/MYOB-Technology/http_server_manager)
 
 Motivation
 ----------
