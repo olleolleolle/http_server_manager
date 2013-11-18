@@ -8,6 +8,7 @@ module HttpServerManager
       @name = options[:name]
       @host = options[:host]
       @port = options[:port]
+      @timeout_in_seconds = options[:timeout_in_seconds] || 20
       @deletable_artifacts = [pid_file_path]
     end
 
@@ -18,7 +19,7 @@ module HttpServerManager
         ensure_directories_exist
         pid = Process.spawn(start_command, { [:out, :err] => [log_file_path, "w"] })
         create_pid_file(pid)
-        Wait.until_true!("#{@name} is running") { running? }
+        Wait.until_true!("#{@name} is running", timeout_in_seconds: @timeout_in_seconds) { running? }
         logger.info "#{@name} started on #{@host}:#{@port}"
       end
     end
@@ -53,7 +54,10 @@ module HttpServerManager
     private
 
     def running?
-      !!Net::HTTP.get_response(@host, "/", @port) rescue false
+      !!(Net::HTTP.new(@host, @port).start do |http|
+        http.open_timeout = http.read_timeout = @timeout_in_seconds
+        http.request_get("/")
+      end) rescue false
     end
 
     def current_pid

@@ -65,6 +65,15 @@ Step 4:  Create a server class:
     end
 ```
 
+Optionally provide a timeout to the server constructor to determine how long ```http_server_manager``` should wait
+until the server starts.  Defaults to 20 seconds:
+
+```ruby
+    def initialize
+        super(name: :my_server, host: "localhost", port: 3000, timeout_in_seconds: 60)
+    end
+```
+
 Step 5:  Control the status of the server:
 
 ```ruby

@@ -23,11 +23,11 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rake", "~> 10.1"
   s.add_dependency "sys-proctree", "~> 0.0.4"
-  s.add_dependency "wait_until", "~> 0.0.1"
+  s.add_dependency "wait_until", "~> 0.1"
 
-  s.add_development_dependency "metric_fu", "~> 4.4"
+  s.add_development_dependency "metric_fu", "~> 4.5"
   s.add_development_dependency "rspec", "~> 2.14"
-  s.add_development_dependency "simplecov", "~> 0.7"
-  s.add_development_dependency "travis-lint", "~> 1.7"
+  s.add_development_dependency "simplecov", "~> 0.8"
   s.add_development_dependency "rack", "~> 1.5"
+  s.add_development_dependency "travis-lint", "~> 1.7"
 end
