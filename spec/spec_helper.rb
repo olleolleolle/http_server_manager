@@ -1,4 +1,6 @@
-require 'simplecov'
+require 'bundler'
+Bundler.require(:default, :development)
+
 SimpleCov.start do
   add_filter "/spec/"
   add_filter "/vendor/"
@@ -18,6 +20,7 @@ module HttpServerManager
 end
 
 require_relative 'support/http_server_manager/test_support'
+
 HttpServerManager.logger = HttpServerManager::Test::SilentLogger
 HttpServerManager.pid_dir = "#{HttpServerManager.root}/tmp/pids"
 HttpServerManager.log_dir = "#{HttpServerManager.root}/tmp/logs"

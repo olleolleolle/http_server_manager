@@ -1,5 +1,6 @@
 require 'bundler'
 require 'bundler/gem_tasks'
+Bundler.require(:default, :development)
 require 'rspec/core/rake_task'
 
 directory "pkg"

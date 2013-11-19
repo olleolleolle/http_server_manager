@@ -1,7 +1,3 @@
-require 'rubygems'
-require 'bundler'
-Bundler.require(:default)
-
 require 'net/http'
 require 'sys/proctree'
 require 'wait_until'
