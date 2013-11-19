@@ -132,6 +132,20 @@ Ensure that your server is configured correctly:
       end
 ```
 
+Or, the same thing a little simpler:
+
+```ruby
+    require 'http_server_manager/test_support'
+
+    describe MyServer do
+
+      let(:server) { MyServer.new }
+
+      it_should_behave_like "a managed http server" # Provided by http_server_manager as a test utility
+
+    end
+```
+
 For those not using RSpec, see http_server_manager/test/server_integration_utilities.rb
 
 OS Support

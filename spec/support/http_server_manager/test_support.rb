@@ -1,3 +1,4 @@
 require_relative 'test/server_integration_utilities'
 require_relative 'test/server_integration_utilities_spec_context'
+require_relative 'test/server_integration_examples'
 require_relative 'test/silent_logger'

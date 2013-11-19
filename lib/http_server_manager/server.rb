@@ -8,7 +8,7 @@ module HttpServerManager
       @name = options[:name]
       @host = options[:host]
       @port = options[:port]
-      @timeout_in_seconds = options[:timeout_in_seconds] || 20
+      @timeout_in_seconds = options[:timeout_in_seconds] || (ENV["timeout"] ? ENV["timeout"].to_i : 20)
       @deletable_artifacts = [pid_file_path]
     end
 

@@ -3,7 +3,7 @@ module HttpServerManager
 
     class SilentLogger
 
-      def method_missing(*args)
+      def self.method_missing(*args)
         # Intentionally blank
       end
 
