@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = ">= 1.9.3"
 
   s.add_dependency "rake", "~> 10.1"
-  s.add_dependency "sys-proctree", "~> 0.0.4"
+  s.add_dependency "sys-proctree", "~> 0.0.5"
   s.add_dependency "wait_until", "~> 0.1"
 
   s.add_development_dependency "metric_fu", "~> 4.5"
