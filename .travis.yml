@@ -1,5 +1,12 @@
 language: ruby
 rvm:
-  - 1.9.3
-  - 2.0.0
-  - 2.1.0
+- 1.9.3
+- 2.0.0
+- 2.1.0
+notifications:
+  email:
+    on_success: change
+    on_failure: always
+  hipchat:
+    rooms:
+      secure: JYU+ReurUkxlXGG6pu10OnYBLSfqBTIiMqyQapnfd7GCSJ9sVKebcLi5HZJMqcuZltQBQ8eLWlaYVr/fXpU9izHDsLIbjQq2J5+FyMtgQVP8vvlDtjAb+hY/qQ5mo5wmcpWBceShzBOpU6vK+r210oEGRcq7uZNcKhfS41ui8xs=
