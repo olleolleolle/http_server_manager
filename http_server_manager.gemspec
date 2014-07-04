@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name = "http_server_manager"
   s.version = ::HttpServerManager::VERSION
   s.platform = Gem::Platform::RUBY
-  s.authors = ["Matthew Ueckerman"]
+  s.authors = ["Matthew Ueckerman", "Kunal Parikh"]
   s.summary = %q{Manages the lifecycle of HTTP server processes}
   s.description = %q{Manages the lifecycle of HTTP server processes}
   s.email = %q{matthew.ueckerman@myob.com}
