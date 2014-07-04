@@ -6,7 +6,7 @@ describe HttpServerManager::StdOutLogger do
 
     it "should write the message to stdout" do
       message = "Some message"
-      logger.should_receive(:puts).with(message)
+      expect(logger).to receive(:puts).with(message)
 
       logger.info message
     end

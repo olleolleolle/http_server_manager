@@ -7,7 +7,7 @@ describe HttpServerManager do
       before(:each) { HttpServerManager.logger = nil }
 
       it "should default to the stdout logger" do
-        HttpServerManager.logger.should be_a(HttpServerManager::StdOutLogger)
+        expect(HttpServerManager.logger).to be_a(HttpServerManager::StdOutLogger)
       end
 
     end
@@ -21,7 +21,7 @@ describe HttpServerManager do
       after(:each) { HttpServerManager.logger = nil }
 
       it "should return the configured logger" do
-        HttpServerManager.logger.should eql(logger)
+        expect(HttpServerManager.logger).to eql(logger)
       end
 
     end

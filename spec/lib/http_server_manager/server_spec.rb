@@ -14,20 +14,20 @@ describe HttpServerManager::Server do
 
   describe "#start!" do
 
-    before(:each) { Wait.stub(:until_true!) }
+    before(:each) { allow(Wait).to receive(:until_true!) }
 
     context "when the server is not running" do
 
       let(:env_timeout) { nil }
 
       before(:each) do
-        ENV.stub(:[]).with("timeout").and_return(env_timeout)
-        server.stub(:running?).and_return(false)
-        Process.stub(:spawn)
+        allow(ENV).to receive(:[]).with("timeout").and_return(env_timeout)
+        allow(server).to receive(:running?).and_return(false)
+        allow(Process).to receive(:spawn)
       end
 
       it "should start the server by spawning a process that executes the start command" do
-        Process.should_receive(:spawn).with("some command", anything).and_return(888)
+        expect(Process).to receive(:spawn).with("some command", anything).and_return(888)
 
         server.start!
       end
@@ -37,7 +37,7 @@ describe HttpServerManager::Server do
         let(:server_options) { { name: "Test Server", host: "localhost", port: 8888, timeout_in_seconds: 3 } }
 
         it "should wait for the specified amount of time in seconds for the server to start" do
-          Wait.should_receive(:until_true!).with(anything, timeout_in_seconds: 3)
+          expect(Wait).to receive(:until_true!).with(anything, timeout_in_seconds: 3)
 
           server.start!
         end
@@ -49,7 +49,7 @@ describe HttpServerManager::Server do
         let(:env_timeout) { "8" }
 
         it "should wait for the specified amount of time in seconds for the server to start" do
-          Wait.should_receive(:until_true!).with(anything, timeout_in_seconds: 8)
+          expect(Wait).to receive(:until_true!).with(anything, timeout_in_seconds: 8)
 
           server.start!
         end
@@ -59,7 +59,7 @@ describe HttpServerManager::Server do
       context "when no timeout is provided" do
 
         it "should wait 20 seconds for the server to start" do
-          Wait.should_receive(:until_true!).with(anything, timeout_in_seconds: 20)
+          expect(Wait).to receive(:until_true!).with(anything, timeout_in_seconds: 20)
 
           server.start!
         end
@@ -73,13 +73,13 @@ describe HttpServerManager::Server do
   describe "#restart!" do
 
     before(:each) do
-      server.stub(:start!)
-      server.stub(:stop!)
+      allow(server).to receive(:start!)
+      allow(server).to receive(:stop!)
     end
 
     it "should first stop the server and then start the server" do
-      server.should_receive(:stop!).ordered
-      server.should_receive(:start!).ordered
+      expect(server).to receive(:stop!).ordered
+      expect(server).to receive(:start!).ordered
 
       server.restart!
     end

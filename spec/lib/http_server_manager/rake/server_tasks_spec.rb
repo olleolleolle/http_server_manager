@@ -21,7 +21,7 @@ describe HttpServerManager::Rake::ServerTasks do
     let(:task) { ::Rake::Task["#{task_namespace}:start"] }
 
     it "should start the server" do
-      server.should_receive(:start!)
+      expect(server).to receive(:start!)
 
       task.execute
     end
@@ -33,7 +33,7 @@ describe HttpServerManager::Rake::ServerTasks do
     let(:task) { ::Rake::Task["#{task_namespace}:stop"] }
 
     it "should stop the server" do
-      server.should_receive(:stop!)
+      expect(server).to receive(:stop!)
 
       task.execute
     end
@@ -45,7 +45,7 @@ describe HttpServerManager::Rake::ServerTasks do
     let(:task) { ::Rake::Task["#{task_namespace}:restart"] }
 
     it "should restart the server" do
-      server.should_receive(:restart!)
+      expect(server).to receive(:restart!)
       task.execute
     end
 
@@ -56,8 +56,8 @@ describe HttpServerManager::Rake::ServerTasks do
     let(:task) { ::Rake::Task["#{task_namespace}:status"] }
 
     it "should write the server name and it's status to stdout" do
-      server.stub(:status).and_return("stopped")
-      server_tasks.should_receive(:puts).with("test_server is stopped")
+      allow(server).to receive(:status).and_return("stopped")
+      expect(server_tasks).to receive(:puts).with("test_server is stopped")
 
       task.execute
     end
