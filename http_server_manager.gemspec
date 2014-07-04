@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency "wait_until", "~> 0.1"
 
   s.add_development_dependency "metric_fu", "~> 4.7"
-  s.add_development_dependency "rspec", "~> 2.14"
+  s.add_development_dependency "rspec", "~> 3.0"
   s.add_development_dependency "simplecov", "~> 0.8"
   s.add_development_dependency "rack", "~> 1.5"
   s.add_development_dependency "travis-lint", "~> 1.7"
