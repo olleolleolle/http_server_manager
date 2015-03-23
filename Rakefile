@@ -47,7 +47,7 @@ task :validate do
   result = `travis-lint #{File.expand_path('../.travis.yml', __FILE__)}`
   puts result
   print "*" * 80+ "\n"
-  raise "Travis CI validation failed" unless result =~ /^Hooray/
+  raise "Travis CI validation failed" unless $?.success?
 end
 
 task :default => %w{ clobber metrics coverage }
