@@ -1,7 +1,7 @@
 shared_examples_for "a managed http server" do
   include_context "managed http server integration utilities"
 
-  it "should be a HttpServerManager::Server" do
+  it "is a HttpServerManager::Server" do
     expect(server).to be_an(HttpServerManager::Server)
   end
 
@@ -9,7 +9,7 @@ shared_examples_for "a managed http server" do
 
     after(:each) { force_stop! }
 
-    it "should start the server via the provided command" do
+    it "starts the server via the provided command" do
       server.start!
 
       wait_until_started!

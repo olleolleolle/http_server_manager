@@ -6,12 +6,12 @@ module HttpServerManager
     class ServerTasks < ::Rake::TaskLib
 
       def initialize(server)
-        desc "Starts a #{server.name} as a background process"
+        desc "Start a #{server.name} as a background process"
         task :start do
           server.start!
         end
 
-        desc "Stops a running #{server.name}"
+        desc "Stop a running #{server.name}"
         task :stop do
           server.stop!
         end
@@ -21,7 +21,7 @@ module HttpServerManager
           server.restart!
         end
 
-        desc "Displays the status of a #{server.name} process"
+        desc "Display the status of a #{server.name} process"
         task :status do
           puts "#{server.name} is #{server.status}"
         end
