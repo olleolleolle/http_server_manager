@@ -37,7 +37,7 @@ describe HttpServerManager::Server do
         let(:server_options) { { name: "Test Server", host: "localhost", port: 8888, timeout_in_seconds: 3 } }
 
         it "should wait for the specified amount of time in seconds for the server to start" do
-          expect(Wait).to receive(:until_true!).with(anything, timeout_in_seconds: 3)
+          expect(Wait).to receive(:until_true!).with(hash_including(timeout_in_seconds: 3))
 
           server.start!
         end
@@ -49,7 +49,7 @@ describe HttpServerManager::Server do
         let(:env_timeout) { "8" }
 
         it "should wait for the specified amount of time in seconds for the server to start" do
-          expect(Wait).to receive(:until_true!).with(anything, timeout_in_seconds: 8)
+          expect(Wait).to receive(:until_true!).with(hash_including(timeout_in_seconds: 8))
 
           server.start!
         end
@@ -59,7 +59,7 @@ describe HttpServerManager::Server do
       context "when no timeout is provided" do
 
         it "should wait 20 seconds for the server to start" do
-          expect(Wait).to receive(:until_true!).with(anything, timeout_in_seconds: 20)
+          expect(Wait).to receive(:until_true!).with(hash_including(timeout_in_seconds: 20))
 
           server.start!
         end

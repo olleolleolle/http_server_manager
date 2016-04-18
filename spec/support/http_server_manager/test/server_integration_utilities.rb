@@ -24,7 +24,7 @@ module HttpServerManager
 
       def force_pid_file_deletion!
         FileUtils.rm_f(pid_file_path)
-        ::Wait.until_false!("#{pid_file_path} is deleted") { pid_file_exists? }
+        ::Wait.until_false!(description: "#{pid_file_path} is deleted") { pid_file_exists? }
       end
 
       def restore_pid_file!
@@ -33,14 +33,14 @@ module HttpServerManager
       end
 
       def wait_until_started!
-        ::Wait.until_true!("#{server.name} starts") do
+        ::Wait.until_true!(description: "#{server.name} starts") do
           !!Net::HTTP.get_response(server.host, "/", server.port) && pid_file_exists?
         end
         FileUtils.cp(pid_file_path, pid_file_backup_path)
       end
 
       def wait_until_stopped!
-        ::Wait.until_true!("#{server.name} stops") do
+        ::Wait.until_true!(description: "#{server.name} stops") do
           begin
             Net::HTTP.get_response(server.host, "/", server.port)
             false
@@ -51,7 +51,7 @@ module HttpServerManager
       end
 
       def wait_until_file_exists!(file)
-        ::Wait.until_true!("#{file} exists") { File.exists?(file) }
+        ::Wait.until_true!(description: "#{file} exists") { File.exists?(file) }
       end
 
       def ensure_pid_file_backup_directory_exists!

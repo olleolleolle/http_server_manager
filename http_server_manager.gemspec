@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rake",         "~> 11.1"
   s.add_dependency "sys-proctree", "~> 0.0"
-  s.add_dependency "wait_until",   "~> 0.1"
+  s.add_dependency "wait_until",   "~> 0.3"
 
   s.add_development_dependency "travis-lint", "~> 2.0"
   s.add_development_dependency "rspec",       "~> 3.4"

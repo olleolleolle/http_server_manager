@@ -19,7 +19,7 @@ module HttpServerManager
         ensure_directories_exist
         pid = Process.spawn(start_command, { [:out, :err] => [log_file_path, "w"] })
         create_pid_file(pid)
-        Wait.until_true!("#{@name} is running", timeout_in_seconds: @timeout_in_seconds) { running? }
+        Wait.until_true!(description: "#{@name} is running", timeout_in_seconds: @timeout_in_seconds) { running? }
         logger.info "#{@name} started on #{@host}:#{@port}"
       end
     end

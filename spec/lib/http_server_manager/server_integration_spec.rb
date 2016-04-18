@@ -24,13 +24,13 @@ describe HttpServerManager::Server, "managing a real server" do
       it "should create a pid file for the server in the configured pid directory" do
         server.start!
 
-        ::Wait.until_true!("server pid created") { pid_file_exists? }
+        ::Wait.until_true!(description: "server pid created") { pid_file_exists? }
       end
 
       it "should create a log file capturing the stdout and stderr of the server in the configured log directory" do
         server.start!
 
-        ::Wait.until_true!("log file is created") do
+        ::Wait.until_true!(description: "log file is created") do
           File.exists?("#{log_dir}/#{name}_console.log")
         end
       end
@@ -77,7 +77,7 @@ describe HttpServerManager::Server, "managing a real server" do
       it "should delete the servers pid file" do
         server.stop!
 
-        ::Wait.until_false!("server pid is deleted") do
+        ::Wait.until_false!(description: "server pid is deleted") do
           File.exists?("#{pid_dir}/#{name}.pid")
         end
       end

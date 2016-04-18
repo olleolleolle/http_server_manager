@@ -1,10 +1,10 @@
 PATH
   remote: .
   specs:
-    http_server_manager (0.4.12)
+    http_server_manager (0.4.13)
       rake (~> 11.1)
       sys-proctree (~> 0.0)
-      wait_until (~> 0.1)
+      wait_until (~> 0.3)
 
 GEM
   remote: http://rubygems.org/
@@ -37,7 +37,7 @@ GEM
       sys-proctable (>= 0.9.8)
     travis-lint (2.0.0)
       json
-    wait_until (0.1.2)
+    wait_until (0.3.0)
 
 PLATFORMS
   ruby
