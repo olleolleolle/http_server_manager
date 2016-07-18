@@ -1,6 +1,8 @@
 require 'bundler'
 require 'bundler/gem_tasks'
 Bundler.require(:default, :development)
+
+require 'rubocop/rake_task'
 require 'rspec/core/rake_task'
 
 directory "pkg"
@@ -11,6 +13,9 @@ task :clobber do
   rm Dir.glob("**/coverage.data"), force: true
   puts "Clobbered"
 end
+
+desc "Source code metrics analysis"
+RuboCop::RakeTask.new(:metrics) { |task| task.fail_on_error = true }
 
 desc "Exercises specifications"
 ::RSpec::Core::RakeTask.new(:spec)
@@ -45,6 +50,6 @@ task :validate do
   raise "Travis CI validation failed" unless $?.success?
 end
 
-task :default => %w{ clobber coverage }
+task :default => %w{ clobber metrics coverage }
 
-task :pre_commit => %w{ clobber coverage:show validate }
+task :pre_commit => %w{ clobber metrics coverage:show validate }
