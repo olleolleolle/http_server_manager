@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.require_paths = ["lib", "spec/support"]
 
-  s.required_ruby_version = ">= 1.9.3"
+  s.required_ruby_version = ">= 2.0"
 
   s.add_dependency "rake",         ">= 10.4"
   s.add_dependency "sys-proctree", "~> 0.0"
