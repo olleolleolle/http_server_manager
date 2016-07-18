@@ -1,3 +1,11 @@
+** 0.4.14 **
+
+Breaking:
+* Dropped Ruby 1.9.3 support (encouraged by `json` gem)
+
+Misc:
+* Dependency update
+
 ** 0.4.13 **
 
 Misc:
