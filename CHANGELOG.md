@@ -1,3 +1,8 @@
+** 0.4.15 **
+
+Misc:
+* `rake` is no longer a a hard dependency, is only required if rake tasks are in use
+
 ** 0.4.14 **
 
 Breaking:
