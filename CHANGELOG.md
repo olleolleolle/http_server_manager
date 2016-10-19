@@ -1,7 +1,13 @@
+** 0.5.0 **
+
+New:
+* `HttpServerManager::Server` optionally supports `ping_uri` argument
+  * A GET request is used to this uri to determine the availability of the server 
+
 ** 0.4.15 **
 
 Misc:
-* `rake` is no longer a a hard dependency, is only required if rake tasks are in use
+* `rake` is no longer a hard dependency, is only required if rake tasks are in use
 
 ** 0.4.14 **
 

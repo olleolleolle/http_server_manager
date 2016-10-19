@@ -8,6 +8,7 @@ module HttpServerManager
       @name                = options[:name]
       @host                = options[:host]
       @port                = options[:port]
+      @ping_uri            = options[:ping_uri] || "/"
       @timeout_in_seconds  = options[:timeout_in_seconds] || (ENV["timeout"] ? ENV["timeout"].to_i : 20)
       @deletable_artifacts = [ pid_file_path ]
     end
@@ -56,7 +57,7 @@ module HttpServerManager
     def running?
       !!(Net::HTTP.new(@host, @port).start do |http|
         http.open_timeout = http.read_timeout = @timeout_in_seconds
-        http.request_get("/")
+        http.request_get(@ping_uri)
       end)
     rescue
       false

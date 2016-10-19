@@ -55,22 +55,31 @@ Step 4:  Create a server class:
     class MyServer < HttpServerManager::Server
 
         def initialize
-            super(name: :my_server, host: "localhost", port: 3000)
+          super(name: :my_server, host: "localhost", port: 3000)
         end
 
         def start_command
-          "rackup --host #{host} --port #{port} my/server_config.ru"
+          "rackup --host #{host} --port #{port} my/rack_application.ru"
         end
 
     end
 ```
 
-Optionally provide a timeout to the server constructor to determine how long ```http_server_manager``` should wait
-until the server starts.  Defaults to 20 seconds:
+Optionally provide a `timeout_in_seconds` to the server constructor to determine how long ```http_server_manager``` 
+should wait until the server starts.  Defaults to 20 seconds:
 
 ```ruby
     def initialize
         super(name: :my_server, host: "localhost", port: 3000, timeout_in_seconds: 60)
+    end
+```
+
+Optionally provide a `ping_uri` to the server constructor, this uri will be requested when ```http_server_manager```
+assesses if the server is available.  Any response code from this uri is acceptable.  Defaults to "/":
+
+```ruby
+    def initialize
+        super(name: :my_server, host: "localhost", port: 3000, ping_uri: "/ping")
     end
 ```
 

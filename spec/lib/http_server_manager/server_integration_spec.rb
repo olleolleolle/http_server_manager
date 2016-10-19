@@ -1,33 +1,35 @@
 describe HttpServerManager::Server, "managing a real server" do
   include_context "managed http server integration utilities"
 
-  let(:name) { "test_server" }
-  let(:host) { "localhost" }
-  let(:port) { 4001 }
+  let(:name)                   { "test_server" }
+  let(:host)                   { "localhost" }
+  let(:port)                   { 4001 }
+  let(:additional_server_args) { {} }
+  let(:server_args)            { { name: name, host: host, port: port }.merge(additional_server_args) }
 
-  let(:server) { RackServer.new(name: name, host: host, port: port) }
+  let(:server) { RackServer.new(server_args) }
 
   describe "#start!" do
 
-    after(:each) { force_stop! }
+    after(:example) { force_stop! }
 
-    describe "when the server is not running" do
+    context "when the server is not running" do
 
-      after(:each) { wait_until_started! } # Ensure server has completely started
+      after(:example) { wait_until_started! } # Ensure server has completely started
 
-      it "should start the server via the provided command" do
+      it "starts the server via the provided command" do
         server.start!
 
         wait_until_started!
       end
 
-      it "should create a pid file for the server in the configured pid directory" do
+      it "creates a pid file for the server in the configured pid directory" do
         server.start!
 
         ::Wait.until_true!(description: "server pid created") { pid_file_exists? }
       end
 
-      it "should create a log file capturing the stdout and stderr of the server in the configured log directory" do
+      it "creates a log file capturing the stdout and stderr of the server in the configured log directory" do
         server.start!
 
         ::Wait.until_true!(description: "log file is created") do
@@ -35,22 +37,36 @@ describe HttpServerManager::Server, "managing a real server" do
         end
       end
 
-      it "should log that the server started on the configured port" do
+      it "logs that the server started on the configured port" do
         expect(logger).to receive(:info).with(/started on #{host}:#{port}/)
 
         server.start!
       end
 
+      context "and a ping_uri is configured" do
+
+        let(:additional_server_args) { { ping_uri: "/ping" } }
+
+        let(:ping_count_endpoint) { URI("http://#{host}:#{port}/ping_count") }
+
+        it "requests the configured ping uri when determining if the server is running" do
+          server.start!
+
+          expect(Net::HTTP.get(ping_count_endpoint)).to eql("1")
+        end
+
+      end
+
     end
 
-    describe "when the server is already running" do
+    context "when the server is already running" do
 
-      before(:each) do
+      before(:example) do
         server.start!
         wait_until_started!
       end
 
-      it "should log that the server is already running on the configured port" do
+      it "logs that the server is already running on the configured port" do
         expect(logger).to receive(:info).with(/already running on #{host}:#{port}/)
 
         server.start!
@@ -62,19 +78,19 @@ describe HttpServerManager::Server, "managing a real server" do
 
   describe "#stop!" do
 
-    describe "when the server is running" do
+    context "when the server is running" do
 
-      before(:each) { force_start! }
+      before(:example) { force_start! }
 
-      after(:each) { force_stop! } # Ensure server has completely stopped
+      after(:example) { force_stop! } # Ensure server has completely stopped
 
-      it "should stop the server" do
+      it "stops the server" do
         server.stop!
 
         wait_until_stopped!
       end
 
-      it "should delete the servers pid file" do
+      it "deletes the servers pid file" do
         server.stop!
 
         ::Wait.until_false!(description: "server pid is deleted") do
@@ -82,7 +98,7 @@ describe HttpServerManager::Server, "managing a real server" do
         end
       end
 
-      it "should log that the server has stopped" do
+      it "logs that the server has stopped" do
         expect(logger).to receive(:info).with(/stopped/)
 
         server.stop!
@@ -90,9 +106,9 @@ describe HttpServerManager::Server, "managing a real server" do
 
     end
 
-    describe "when the server is not running" do
+    context "when the server is not running" do
 
-      it "should log that the server is not running" do
+      it "logs that the server is not running" do
         expect(logger).to receive(:info).with(/not running/)
 
         server.stop!
@@ -104,27 +120,27 @@ describe HttpServerManager::Server, "managing a real server" do
 
   describe "#status" do
 
-    describe "when the server is running" do
+    context "when the server is running" do
 
-      before(:each) { force_start! }
+      before(:example) { force_start! }
 
-      after(:each) { force_stop! }
+      after(:example) { force_stop! }
 
-      describe "and the pid file exists" do
+      context "and the pid file exists" do
 
-        it "should return :started" do
+        it "returns :started" do
           expect(server.status).to eql(:started)
         end
 
       end
 
-      describe "and the pid file does not exist" do
+      context "and the pid file does not exist" do
 
-        before(:each) { force_pid_file_deletion! }
+        before(:example) { force_pid_file_deletion! }
 
-        after(:each) { restore_pid_file! }
+        after(:example) { restore_pid_file! }
 
-        it "should return :started" do
+        it "returns :started" do
           expect(server.status).to eql(:started)
         end
 
@@ -132,23 +148,23 @@ describe HttpServerManager::Server, "managing a real server" do
 
     end
 
-    describe "when the server is not running" do
+    context "when the server is not running" do
 
-      describe "and the pid file does not exist" do
+      context "and the pid file does not exist" do
 
-        it "should return :stopped" do
+        it "returns :stopped" do
           expect(server.status).to eql(:stopped)
         end
 
       end
 
-      describe "and the pid file exists" do
+      context "and the pid file exists" do
 
-        before(:each) { force_pid_file_creation! }
+        before(:example) { force_pid_file_creation! }
 
-        after(:each) { force_pid_file_deletion! }
+        after(:example) { force_pid_file_deletion! }
 
-        it "should return :stopped" do
+        it "returns :stopped" do
           expect(server.status).to eql(:stopped)
         end
 
@@ -160,15 +176,15 @@ describe HttpServerManager::Server, "managing a real server" do
 
   describe "#to_s" do
 
-    it "should return a string containing the servers name" do
+    it "returns a string containing the servers name" do
       expect(server.to_s).to match(name)
     end
 
-    it "should return a string containing the servers host" do
+    it "returns a string containing the servers host" do
       expect(server.to_s).to match(host)
     end
 
-    it "should return a string containing the servers port" do
+    it "returns a string containing the servers port" do
       expect(server.to_s).to match(port.to_s)
     end
 

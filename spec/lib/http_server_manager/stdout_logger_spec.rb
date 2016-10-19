@@ -4,7 +4,7 @@ describe HttpServerManager::StdOutLogger do
 
   describe "#info" do
 
-    it "should write the message to stdout" do
+    it "writes the message to stdout" do
       message = "Some message"
       expect(logger).to receive(:puts).with(message)
 

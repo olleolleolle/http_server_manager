@@ -3,24 +3,24 @@ describe HttpServerManager::Rake::ServerTasks do
   include ::Rake::DSL
 
   let(:task_namespace) { :test_server_namespace }
-  let(:task_scope) { double("TaskScope", path: task_namespace) }
-  let(:server) { double(HttpServerManager::Server, name: "test_server") }
+  let(:task_scope)     { double("TaskScope", path: task_namespace) }
+  let(:server)         { instance_double(HttpServerManager::Server, name: "test_server") }
 
-  let(:server_tasks) { HttpServerManager::Rake::ServerTasks.new(server) }
+  let(:server_tasks) { described_class.new(server) }
 
-  before(:each) do
+  before(:example) do
     namespace task_namespace do
       server_tasks
     end
   end
 
-  after(:each) { Rake.application.tasks_in_scope(task_scope).each(&:clear) }
+  after(:example) { Rake.application.tasks_in_scope(task_scope).each(&:clear) }
 
   describe "start task" do
 
     let(:task) { ::Rake::Task["#{task_namespace}:start"] }
 
-    it "should start the server" do
+    it "starts the server" do
       expect(server).to receive(:start!)
 
       task.execute
@@ -32,7 +32,7 @@ describe HttpServerManager::Rake::ServerTasks do
 
     let(:task) { ::Rake::Task["#{task_namespace}:stop"] }
 
-    it "should stop the server" do
+    it "stops the server" do
       expect(server).to receive(:stop!)
 
       task.execute
@@ -44,7 +44,7 @@ describe HttpServerManager::Rake::ServerTasks do
 
     let(:task) { ::Rake::Task["#{task_namespace}:restart"] }
 
-    it "should restart the server" do
+    it "restarts the server" do
       expect(server).to receive(:restart!)
       task.execute
     end
@@ -55,7 +55,7 @@ describe HttpServerManager::Rake::ServerTasks do
 
     let(:task) { ::Rake::Task["#{task_namespace}:status"] }
 
-    it "should write the server name and it's status to stdout" do
+    it "writes the server name and its status to stdout" do
       allow(server).to receive(:status).and_return("stopped")
       expect(server_tasks).to receive(:puts).with("test_server is stopped")
 
