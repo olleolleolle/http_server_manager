@@ -1,3 +1,8 @@
+** 0.5.1 **
+
+Misc:
+* Dependency update
+
 ** 0.5.0 **
 
 New:

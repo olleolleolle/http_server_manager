@@ -8,7 +8,8 @@ module HttpServerManager
 
   class << self
 
-    attr_accessor :logger, :pid_dir, :log_dir
+    attr_accessor :pid_dir, :log_dir
+    attr_writer   :logger
 
     def logger
       @logger || HttpServerManager::StdOutLogger.new

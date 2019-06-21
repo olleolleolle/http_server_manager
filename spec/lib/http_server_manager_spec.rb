@@ -2,6 +2,10 @@ describe HttpServerManager do
 
   describe "::logger" do
 
+    before(:example) { @initial_logger = HttpServerManager.logger }
+
+    after(:example) { HttpServerManager.logger = @initial_logger }
+
     context "when no logger has been explicitly configured" do
 
       before(:example) { HttpServerManager.logger = nil }
@@ -17,8 +21,6 @@ describe HttpServerManager do
       let(:logger) { double("Logger").as_null_object }
 
       before(:example) { HttpServerManager.logger = logger }
-
-      after(:example) { HttpServerManager.logger = nil }
 
       it "returns the configured logger" do
         expect(HttpServerManager.logger).to eql(logger)

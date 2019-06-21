@@ -18,7 +18,7 @@ module HttpServerManager
         logger.info "#{@name} already running on #{@host}:#{@port}"
       else
         ensure_directories_exist
-        pid = Process.spawn(start_command, [:out, :err] => [ log_file_path, "w" ])
+        pid = Process.spawn(start_command, %i{ out err } => [ log_file_path, "w" ])
         create_pid_file(pid)
         Wait.until_true!(description: "#{@name} is running", timeout_in_seconds: @timeout_in_seconds) { running? }
         logger.info "#{@name} started on #{@host}:#{@port}"
@@ -59,7 +59,7 @@ module HttpServerManager
         http.open_timeout = http.read_timeout = @timeout_in_seconds
         http.request_get(@ping_uri)
       end)
-    rescue
+    rescue StandardError
       false
     end
 
