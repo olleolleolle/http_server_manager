@@ -159,7 +159,7 @@ For those not using RSpec, see http_server_manager/test/server_integration_utili
 OS Support
 ----------
 
-Mac and Windows
+Mac, Linux, Windows
 
 Requirements
 ------------
