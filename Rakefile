@@ -7,7 +7,7 @@ require 'rspec/core/rake_task'
 
 directory "pkg"
 
-desc "Removed generated artefacts"
+desc "Removed generated artifacts"
 task :clobber do
   %w{ coverage pkg }.each { |dir| rm_rf dir }
   rm Dir.glob("**/coverage.data"), force: true
