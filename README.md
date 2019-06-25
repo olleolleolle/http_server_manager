@@ -17,6 +17,8 @@ Status
 
 [![Build Status](https://travis-ci.org/MYOB-Technology/http_server_manager.png)](https://travis-ci.org/MYOB-Technology/http_server_manager)
 [![Gem Version](https://badge.fury.io/rb/http_server_manager.png)](http://badge.fury.io/rb/http_server_manager)
+[![Code Climate](https://codeclimate.com/github/MYOB-Technology/http_server_manager/badges/gpa.svg)](https://codeclimate.com/github/MYOB-Technology/http_server_manager)
+[![Test Coverage](https://codeclimate.com/github/MYOB-Technology/http_server_manager/badges/coverage.svg)](https://codeclimate.com/github/MYOB-Technology/http_server_manager/coverage)
 
 Motivation
 ----------
