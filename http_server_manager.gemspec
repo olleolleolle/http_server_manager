@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 $LOAD_PATH.push ::File.expand_path("lib", __dir__)
 require "http_server_manager/version"
 
@@ -6,7 +5,7 @@ Gem::Specification.new do |spec|
   spec.name = "http_server_manager"
   spec.version = ::HttpServerManager::VERSION
   spec.platform = Gem::Platform::RUBY
-  spec.authors = [ "Matthew Ueckerman", "Kunal Parikh" ]
+  spec.authors = %w{ dueckes techthumb }
   spec.summary = "Manages the lifecycle of HTTP server processes"
   spec.description = "Manages the lifecycle of HTTP server processes"
   spec.email = "matthew.ueckerman@myob.com"
