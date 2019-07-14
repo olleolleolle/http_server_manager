@@ -10,7 +10,6 @@ Gem::Specification.new do |spec|
   spec.description = "Manages the lifecycle of HTTP server processes"
   spec.email = "matthew.ueckerman@myob.com"
   spec.homepage = "http://github.com/MYOB-Technology/http_server_manager"
-  spec.rubyforge_project = "http_server_manager"
   spec.license = "MIT"
 
   spec.files      = Dir.glob("./lib/**/*") + Dir.glob("./spec/support/**/*")
